@@ -11,7 +11,7 @@ class PageHeader extends Component {
         <div className={styles.container}>
           <a href="/" className={styles.logo} />
           <div className={styles.center}>
-            <span className={styles.home}><i className="iconfont icon-zhinanzhe" />首页</span>
+            <span className={styles.home}><i className="iconfont icon-zhinanzhen" />首页</span>
           </div>
           <div className={styles.right}>
             right
