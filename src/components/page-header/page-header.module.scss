@@ -1,0 +1,33 @@
+.pageHeaderWrapper {
+  background-color: #fff;
+  .container {
+    min-width: 768px;
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row nowrap;
+    .logo {
+      flex: 1 0 auto;
+      display: inline-block;
+      width: 100px;
+      height: 56px;
+      background: url(//cdn2.jianshu.io/assets/web/nav-logo-4c7bbafe27adc892f3046e6978459bac.png) no-repeat;
+      background-size: 100px 56px;
+    }
+    .center {
+      flex: 0 1 960px;
+      display: inline-block;
+      width: 960px;
+      margin: 0 auto;
+      border: solid 1px #eee;
+      line-height: 56px;
+      box-sizing: border-box;
+      .home {
+        color: #ea6f5a;
+      }
+    }
+    .right {
+      flex: 1 0 180px;
+    }
+  }  
+}
