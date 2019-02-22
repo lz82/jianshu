@@ -1,3 +1,5 @@
 import PageHeader from './page-header'
 
-export { PageHeader }
+import pageHeader from './store/reducer'
+
+export { PageHeader, pageHeader }

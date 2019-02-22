@@ -1,0 +1,11 @@
+.slide-enter, .slide-exit {
+  transition: all 0.2s ease-in !important;
+}
+
+.slide-enter-active, .slide-enter-done {
+  width: 320px !important;
+}
+
+.slide-exit-active, .slide-exit-done {
+  width: 240px !important;
+}
