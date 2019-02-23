@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 
-import { searchkeyChange, searchFocusChange } from './store/action-creator'
+import { searchkeyChange, searchFocusChange, hotActiveChange, hotListGet, hostIndexChange } from './store/action-creator'
 
 import styles from './page-header.module.scss'
 import './transition.css'
@@ -11,7 +11,8 @@ import '../../style/iconfont/iconfont.css'
 class PageHeader extends Component {
 
   render () {
-    const { keyword, searchFocus, onKeywordChange, onSearchBlur, onSearchFocus } = this.props
+    const { keyword, searchFocus, hotActive, hotList, hotIndex, 
+      onKeywordChange, onSearchBlur, onSearchFocus, onHotEnter, onHotLeave, onHotChange } = this.props
     return (
       <header className={styles.pageHeaderWrapper}>
         <div className={styles.container}>
@@ -65,6 +66,27 @@ class PageHeader extends Component {
                       className="iconfont icon-search"
                     />
                   </a>
+                  <div
+                    className={styles['hot-search'] + ' ' + ((hotActive || searchFocus) ? styles.active : '')}
+                    onMouseEnter={onHotEnter}
+                    onMouseLeave={onHotLeave}
+                  >
+                    <div className={styles.title}>
+                      <span className={styles['hot-search-title-left']}>热门搜索</span>
+                      <span 
+                        className={styles['hot-search-title-right']}
+                        onClick={onHotChange}
+                      >
+                        <i className="iconfont icon-shuaxin" />
+                        换一批
+                      </span>
+                    </div>
+                    <div className={styles.content}>
+                      <ul>
+                        {this.getHotItem(hotList, hotIndex)}
+                      </ul>
+                    </div>
+                  </div>
                 </form>
               </div>
             </div>    
@@ -101,13 +123,33 @@ class PageHeader extends Component {
       </header>
     )
   }
+
+  showHot () {
+    if (this.props.hotActive || this.props.searchFocus) {
+      return 'styles.active'
+    } else {
+      return ''
+    }
+  }
+
+  getHotItem(hotList, hotIndex) {
+    return hotList.slice(hotIndex * 10, (hotIndex + 1) * 10)
+          .map(item => {
+            return (
+              <li key={item} className={styles['hot-item']}><span>{item}</span></li>
+            )
+          })
+  }
 }
 
 const mapStateToProps = state => {
   return {
     // 两种不同的写法
     keyword: state.getIn(['pageHeader', 'searchKey']),
-    searchFocus: state.get('pageHeader').get('searchFocus')
+    searchFocus: state.get('pageHeader').get('searchFocus'),
+    hotActive: state.getIn(['pageHeader', 'hotActive']),
+    hotList: state.getIn(['pageHeader', 'hotList']),
+    hotIndex: state.getIn(['pageHeader', 'hotIndex'])
   }
 }
 
@@ -122,7 +164,20 @@ const mapDispatchToProps = dispatch => {
     },
 
     onSearchFocus () {
+      dispatch(hotListGet())
       dispatch(searchFocusChange(true))
+    },
+
+    onHotEnter () {
+      dispatch(hotActiveChange(true))
+    },
+
+    onHotLeave () {
+      dispatch(hotActiveChange(false))
+    },
+
+    onHotChange () {
+      dispatch(hostIndexChange())
     }
   }
 } 
