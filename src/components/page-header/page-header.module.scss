@@ -118,6 +118,7 @@
               flex-flow: row nowrap;
               justify-content: space-between;
               line-height: 20px;
+              margin-bottom: 10px;
               font-weight: 500;
               .hot-search-title-left {
                 font-size: 14px;
@@ -130,21 +131,27 @@
                 flex-flow: row nowrap;
                 justify-content: center;
                 cursor: pointer;
+                .spin {
+                  transition: all 0.2s ease-in;
+                  // transform: rotate(0deg);
+                  transform-origin: center center;
+                }
                 &:hover {
                   color: #2f2f2f;
                 }
               }
             }
             .content {
+              line-height: 20px;
               .hot-item {
                 display: inline-block;
-                line-height: 28px;
+                margin-right: 10px;
+                margin-bottom: 10px;
                 font-size: 12px;
                 padding: 2px 6px;
                 color: #787878;
                 border: solid 1px #ddd;
                 border-radius: 3px;
-                margin-right: 10px;
               }
             }
           }

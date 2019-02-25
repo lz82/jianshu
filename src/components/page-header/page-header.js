@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 
@@ -9,6 +10,11 @@ import './transition.css'
 import '../../style/iconfont/iconfont.css'
 
 class PageHeader extends Component {
+  constructor (props) {
+    super(props)
+
+    this.changeHot = React.createRef()
+  }
 
   render () {
     const { keyword, searchFocus, hotActive, hotList, hotIndex, 
@@ -16,27 +22,26 @@ class PageHeader extends Component {
     return (
       <header className={styles.pageHeaderWrapper}>
         <div className={styles.container}>
-          <a 
-            href="/" 
+          <Link 
+            to="/" 
             className={styles.logo} 
-          >
-          </a>
+          />
           <div className={styles.center}>
             <div className={styles['center-left']}>
-              <a
-                href="/"
+              <Link
+                to="/"
                 className={styles.home}
               >
                 <i className="iconfont icon-zhinanzhen" />
                 <span>首页</span>
-              </a>
-              <a
-                href="/"
+              </Link>
+              <Link
+                to="/download"
                 className={styles.download}
               >
                 <i className="iconfont icon-browserdownload2" />
                 <span>下载APP</span>
-              </a>
+              </Link>
               <div
                 className={styles.searchWrapper}
               >
@@ -55,17 +60,17 @@ class PageHeader extends Component {
                       value={keyword}
                       onChange={onKeywordChange}
                       onBlur={onSearchBlur}
-                      onFocus={onSearchFocus}
+                      onFocus={() => onSearchFocus(hotList)}
                     />
                   </CSSTransition>
-                  <a
-                    href="/"
+                  <Link
+                    to="/"
                     className={styles.searchBtn + ' ' + (searchFocus ? styles.active : '')}
                   >
                     <i
                       className="iconfont icon-search"
                     />
-                  </a>
+                  </Link>
                   <div
                     className={styles['hot-search'] + ' ' + ((hotActive || searchFocus) ? styles.active : '')}
                     onMouseEnter={onHotEnter}
@@ -75,9 +80,9 @@ class PageHeader extends Component {
                       <span className={styles['hot-search-title-left']}>热门搜索</span>
                       <span 
                         className={styles['hot-search-title-right']}
-                        onClick={onHotChange}
+                        onClick={() => onHotChange(this.changeHot)}
                       >
-                        <i className="iconfont icon-shuaxin" />
+                        <i className={`iconfont icon-shuaxin ${styles.spin}`} ref={this.changeHot}/>
                         换一批
                       </span>
                     </div>
@@ -94,30 +99,30 @@ class PageHeader extends Component {
               <i
                 className={`iconfont icon-Aa ${styles.font}`}
               />
-              <a
-                href="/"
+              <Link
+                to="/"
                 className={styles.login}
               >
                 登录
-              </a>
+              </Link>
             </div>
           </div>
           <div className={styles.right}>
-            <a
-              href="/"
+            <Link
+              to="/"
               className={styles.register}
             >
               注册
-            </a>
-            <a
-              href="/"
+            </Link>
+            <Link
+              to="/"
               className={styles['write-doc']}
             >
               <i 
                 className={`iconfont icon-quill ${styles.write}`}
               />
               写文章
-            </a>
+            </Link>
           </div>
         </div>
       </header>
@@ -163,8 +168,10 @@ const mapDispatchToProps = dispatch => {
       dispatch(searchFocusChange(false))
     },
 
-    onSearchFocus () {
-      dispatch(hotListGet())
+    onSearchFocus(list) {      
+      if (list.size === 0) {
+        dispatch(hotListGet())
+      }      
       dispatch(searchFocusChange(true))
     },
 
@@ -176,7 +183,10 @@ const mapDispatchToProps = dispatch => {
       dispatch(hotActiveChange(false))
     },
 
-    onHotChange () {
+    onHotChange (ref) {
+      const originAngle = ref.current.style.transform.replace(/[^0-9]/ig, '') - 0
+      
+      ref.current.style.transform = `rotate(${originAngle ? (originAngle + 360) : 360}deg)`
       dispatch(hostIndexChange())
     }
   }
