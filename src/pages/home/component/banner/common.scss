@@ -1,11 +1,17 @@
 .homePageBannerWrapper {
   .ant-carousel {
-    width: 485px;
-    height: 210px;
+    width: 625px;
+    height: 270px;
     .slick-slide {
-      width: 485px;
-      height: 210px;
-      // overflow: hidden;
+      width: 625px;
+      height: 270px;
+      overflow: hidden;
+      .img {
+        width: 625px;
+        height: 270px;
+        object-fit: cover;
+        overflow: hidden;
+      }
     }
   }
 }

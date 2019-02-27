@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
-class Download extends Component {
+class Download extends PureComponent {
   render () {
     return (
       <div>

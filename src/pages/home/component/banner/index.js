@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
 import { Carousel } from 'antd'
 import * as styles from './banner.module.scss'
 import './common.scss'
 
-class HomeBanner extends Component {
+class HomeBanner extends PureComponent {
   constructor(props) {
     super(props)
 
@@ -18,10 +18,9 @@ class HomeBanner extends Component {
   render() {
     const { picList } = this.state
     return (
-      <div className="homePageBannerWrapper" >
+      <div className={`homePageBannerWrapper ${styles.wrapper}`} >
         <Carousel 
           autoplay
-          className={styles.swiper}
         >
           {
             picList.map(item => {
@@ -30,7 +29,7 @@ class HomeBanner extends Component {
                   key={item}
                   src={item}
                   alt="banner"
-                  style={{ width: "485px", height: "210px", objectFit: "cover" }}
+                  className="img"
                 />
               )
             })

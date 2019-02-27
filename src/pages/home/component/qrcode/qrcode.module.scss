@@ -1,0 +1,61 @@
+.wrapper {
+  position: relative;
+  width: 280px;
+  height: 80px;
+  box-sizing: border-box;
+  padding: 10px 22px;
+  border: solid 1px #f0f0f0;
+  a {
+    display: flex;
+    flex-flow: row nowrap;
+    .pic-wrapper {
+      flex: 0 0 60px;
+      .pic {
+        width: 60px;
+        height: 60px;
+      }
+    }
+    .content {
+      flex: 1 0 auto;
+      margin-left: 7px;
+      h4 {
+        font-size: 15px;
+        color: #333;
+      }
+      p {
+        font-size: 13px;
+        margin-top: 4px;
+        color: #999;
+      }
+    }
+  }
+  .preview {
+    display: none;
+    position: absolute;
+    top: -190px;
+    left: 50px;
+    box-sizing: border-box;
+    padding: 20px;
+    border: solid 1px #eee;
+    background-color: #fff;
+    box-shadow: 0 0 8px rgba(0,0,0,.2);
+    img {
+      width: 140px;
+      height: 140px;
+    }
+    &.active {
+      display: block;
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      transform: rotate(45deg);
+      bottom: -5px;
+      left: 85px;
+    }
+  }
+}

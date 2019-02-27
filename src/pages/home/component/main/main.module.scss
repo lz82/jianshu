@@ -1,0 +1,19 @@
+.main-wrapper {
+  width: 640px;
+  .content-wrapper {
+    border-top: solid 1px #eee;
+    .more {
+      display: inline-block;
+      text-align: center;
+      width: 100%;
+      background-color: #a5a5a5;
+      color: #fff;
+      border-radius: 20px;
+      margin: 30px auto 60px;
+      line-height: 40px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
@@ -9,7 +9,7 @@ import styles from './page-header.module.scss'
 import './transition.css'
 import '../../style/iconfont/iconfont.css'
 
-class PageHeader extends Component {
+class PageHeader extends PureComponent {
   constructor (props) {
     super(props)
 

@@ -1,12 +1,16 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
-import HomeBanner from './component/banner'
+import HomeMain from './component/main'
+import HomeSidebar from './component/sidebar'
 
-class Home extends Component {
+import * as styles  from './home.module.scss';
+
+class Home extends PureComponent {
   render () {
     return (
-      <div>
-        <HomeBanner />
+      <div className={styles.homewrapper}>
+        <HomeMain />
+        <HomeSidebar />
       </div>
     )
   }
