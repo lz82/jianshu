@@ -20,7 +20,9 @@ class HomeArticle extends PureComponent {
         <div
           className={styles['article-left']}
         >
-          <h3 className={styles.title}><Link to="/">{title}</Link></h3>
+          <h3 className={styles.title}>
+            <Link to={`/detail/${author}`}>{title}</Link>
+          </h3>
           <p className={styles.content}>{content}</p>
           <p className={styles.summary}>
             {
