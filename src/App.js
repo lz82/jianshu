@@ -15,13 +15,6 @@ const Detail = lazy(() => import('./pages/detail'))
 console.log(Home)
 
 class App extends PureComponent {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      showTop: false
-    }
-  }
   render() {
     return (
       <Provider store={store}>
@@ -36,30 +29,10 @@ class App extends PureComponent {
                 <Route exact path="/detail/:id" component={props => <Detail {...props} />} />
               </Switch>
             </Suspense>
-            <span
-              className={`back-to-top ${this.state.showTop ? "active" : ""}`}
-            >
-              <i className="iconfont icon-arrowup" />
-            </span>
           </div>
         </Router>
       </Provider>
     );
-  }
-
-  componentDidMount () {
-    window.addEventListener('scroll', () => {
-      const top = document.documentElement.scrollTop
-      if (top > 100) {
-        this.setState({
-          showTop: true
-        })
-      } else {
-        this.setState({
-          showTop: false
-        })
-      }
-    })
   }
 }
 
